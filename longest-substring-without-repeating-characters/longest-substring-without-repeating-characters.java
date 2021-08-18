@@ -11,7 +11,7 @@ class Solution {
                 set.remove(chars[left++]);
             } else {
                 set.add(chars[right++]);
-                if (answer < (right - left)) answer = right - left;
+                answer = Math.max(answer, right - left);
             }
         }
         return answer;
