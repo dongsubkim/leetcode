@@ -9,15 +9,14 @@ class Solution {
         s.forEachIndexed { i, c ->
             lastIndex[c - 'a'] = i
         }
-        return s.mapIndexed { i, c ->
+        val answer = mutableListOf<Int>()
+        s.mapIndexed { i, c ->
             index = max(index, lastIndex[c - 'a'])
             if (i == index) {
-                val size = i - anchor + 1
+                answer.add(i - anchor + 1)
                 anchor = i + 1
-                size
-            } else {
-                null
-            }
-        }.filterNotNull()
+            } 
+        }
+        return answer.toList()
     }
 }
