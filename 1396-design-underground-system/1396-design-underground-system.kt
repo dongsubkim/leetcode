@@ -2,7 +2,7 @@ class UndergroundSystem() {
     
     private val customers = mutableMapOf<Int, Pair<String, Int>>()
     
-    private val endStations = mutableMapOf<String, MutableMap<String, MutableList<Int>>>()
+    private val endStations = mutableMapOf<String, MutableMap<String, Pair<Int, Int>>>()
 
     fun checkIn(id: Int, stationName: String, t: Int) {
         customers.put(id, Pair(stationName, t))
@@ -11,18 +11,22 @@ class UndergroundSystem() {
     fun checkOut(id: Int, stationName: String, t: Int) {
         val customerIn = customers[id]!!
         if (!endStations.containsKey(stationName)) {
-            endStations[stationName] = mutableMapOf<String, MutableList<Int>>()
+            endStations[stationName] = mutableMapOf<String, Pair<Int, Int>>()
         }
         val endStation = endStations[stationName]!!
         
         if (!endStation.containsKey(customerIn.first)) {
-            endStation[customerIn.first] = mutableListOf<Int>()
+            endStation[customerIn.first] = Pair(1, t - customerIn.second)
+        } else {
+            val p = endStation[customerIn.first]!!
+            endStation[customerIn.first] = Pair(p.first + 1, p.second + t - customerIn.second) 
         }
-        endStation[customerIn.first]!!.add(t - customerIn.second)
+
     }
 
     fun getAverageTime(startStation: String, endStation: String): Double {
-        return endStations[endStation]!![startStation]!!.average()
+        val p = endStations[endStation]!![startStation]!!
+        return 1.0 * p.second / p.first
     }
 
 }
