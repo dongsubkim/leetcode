@@ -8,6 +8,6 @@ class Solution {
             }            
         }
         
-        return palindrome.slice(0 .. (palindrome.lastIndex - 1)) + "b"
+        return palindrome.take(palindrome.lastIndex) + "b"
     }
 }
