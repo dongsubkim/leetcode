@@ -6,7 +6,7 @@ class Solution {
             if (index == (palindrome.length / 2)) break
             
             if (char != 'a') {
-                return palindrome.take(index) + "a" + palindrome.drop(index + 1)
+                return palindrome.substring(0, index) + "a" + palindrome.substring(index + 1)
             }            
         }
         
