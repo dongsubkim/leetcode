@@ -2,8 +2,8 @@ class Solution {
     fun breakPalindrome(palindrome: String): String {
         if (palindrome.length == 1) return ""
         
-        for ((index, char) in palindrome.withIndex()) {
-            if (char != 'a' && index != (palindrome.length / 2)) {
+        for (index in 0 until (palindrome.length / 2)) {
+            if (palindrome[index] != 'a') {
                 return palindrome.take(index) + "a" + palindrome.drop(index + 1)
             }            
         }
